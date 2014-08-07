@@ -113,6 +113,7 @@ abstract class AbstractUserResponse implements UserResponseInterface
             if (!$response) {
                 $this->response = array();
             } else {
+                $response =  substr($response, strrpos ( $response , "{"));
                 $this->response = json_decode($response, true);
 
                 if (JSON_ERROR_NONE !== json_last_error()) {

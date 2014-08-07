@@ -61,7 +61,7 @@ class GenericOAuth2ResourceOwner extends AbstractResourceOwner
             'response_type' => 'code',
             'client_id'     => $this->options['client_id'],
             'scope'         => $this->options['scope'],
-            'state'         => $this->state ? urlencode($this->state) : null,
+            'state'         => $this->state ? urlencode($this->state) : 1,
             'redirect_uri'  => $redirectUri,
         ), $extraParameters);
 
@@ -88,7 +88,7 @@ class GenericOAuth2ResourceOwner extends AbstractResourceOwner
             'grant_type'    => 'authorization_code',
             'client_id'     => $this->options['client_id'],
             'client_secret' => $this->options['client_secret'],
-            'redirect_uri'  => $redirectUri,
+         //   'redirect_uri'  => $redirectUri,
         ), $extraParameters);
 
         $response = $this->doGetTokenRequest($this->options['access_token_url'], $parameters);

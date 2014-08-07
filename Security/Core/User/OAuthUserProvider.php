@@ -36,7 +36,19 @@ class OAuthUserProvider implements UserProviderInterface, OAuthAwareUserProvider
      */
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
-        return $this->loadUserByUsername($response->getNickname());
+        $user = $this->loadUserByUsername($response->getNickname());
+        $roles = array();
+        array_push($roles, 'ROLE_USER');
+        array_push($roles, 'ROLE_OAUTH_USER');
+
+        if($response->getResponse()['wp_user_level'] == '10')
+        {
+            array_push($roles, 'ROLE_ADMIN');
+        }
+
+        $user->setRoles($roles);
+
+        return $user;
     }
 
     /**

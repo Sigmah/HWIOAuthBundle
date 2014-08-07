@@ -20,6 +20,24 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class OAuthUser implements UserInterface
 {
+    protected $roles = array();
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+    /**
+     * @param array $roles
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+    }
+
     /**
      * @var string
      */
@@ -33,13 +51,6 @@ class OAuthUser implements UserInterface
         $this->username = $username;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function getRoles()
-    {
-        return array('ROLE_USER', 'ROLE_OAUTH_USER');
-    }
 
     /**
      * {@inheritDoc}

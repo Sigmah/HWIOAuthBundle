@@ -66,6 +66,11 @@ class ConnectController extends ContainerAware
             $error = $error->getMessage();
         }
 
+		//MEDVE
+		/** @var $helper HWI\Bundle\OAuthBundle\Templating\Helper\OAuthHelper */
+		$helper = $this->container->get("hwi_oauth.templating.helper.oauth");
+		$owners = $helper->getResourceOwners();
+		return new RedirectResponse($helper->getLoginUrl($owners[0]), 302);
         return $this->container->get('templating')->renderResponse('HWIOAuthBundle:Connect:login.html.' . $this->getTemplatingEngine(), array(
             'error'   => $error,
         ));
